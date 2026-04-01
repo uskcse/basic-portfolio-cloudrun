@@ -3,12 +3,13 @@ substitutions:
   _REGION: us-central1
   _AR_REPO: cloud-run-images
   _TAG: latest
-  _CPU: '1'
-  _MEMORY: 256Mi
+  _CPU: '0.08'
+  _MEMORY: 128Mi
   _MIN_INSTANCES: '0'
   _MAX_INSTANCES: '1'
-  _CONCURRENCY: '80'
-  _TIMEOUT_SECONDS: '60'
+  _CONCURRENCY: '1'
+  _TIMEOUT_SECONDS: '30'
+  _EXECUTION_ENVIRONMENT: gen1
 
 steps:
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -50,9 +51,13 @@ steps:
       - '${_REGION}'
       - '--platform'
       - 'managed'
+      - '--execution-environment'
+      - '${_EXECUTION_ENVIRONMENT}'
       - '--allow-unauthenticated'
       - '--port'
       - '8080'
+      - '--cpu-throttling'
+      - '--no-cpu-boost'
       - '--cpu'
       - '${_CPU}'
       - '--memory'

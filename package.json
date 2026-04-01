@@ -1,0 +1,17 @@
+{
+  "name": "basic-portfolio-cloudrun",
+  "version": "1.0.0",
+  "description": "A basic portfolio website using Node.js, Express, and static HTML/CSS/JS.",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

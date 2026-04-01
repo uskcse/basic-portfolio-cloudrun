@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Personal portfolio website with intro, about, projects, and contact sections."
+    />
+    <title>Alex Carter | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Work+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="#home">Alex Carter</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="section hero">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Software Developer • Problem Solver</p>
+            <h1>Hi, I'm Alex.</h1>
+            <p class="lead">
+              I build reliable web experiences that are fast, accessible, and
+              delightful to use.
+            </p>
+            <a class="button" href="#projects">View Projects</a>
+          </div>
+          <div class="hero-card">
+            <h2>Short Bio</h2>
+            <p>
+              I enjoy turning ideas into practical products. My focus is on
+              building clean interfaces, scalable services, and user-friendly
+              experiences.
+            </p>
+            <ul>
+              <li>4+ years building web apps</li>
+              <li>Strong in JavaScript, Node.js, and cloud deployment</li>
+              <li>Passionate about performance and DX</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container section-card">
+          <h2>About</h2>
+          <p>
+            I'm a developer who enjoys creating products at the intersection of
+            design and engineering. I care about writing maintainable code,
+            collaborating with teams, and shipping features that solve real
+            problems.
+          </p>
+          <p>
+            Outside of work, I explore new tools, write technical notes, and
+            mentor aspiring developers.
+          </p>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <div class="container">
+          <h2>Projects</h2>
+          <div class="projects-grid">
+            <article class="project-card">
+              <h3>TaskFlow</h3>
+              <p>
+                A productivity app for managing tasks with reminders, tags, and
+                team collaboration features.
+              </p>
+              <p class="stack">Stack: HTML, CSS, JavaScript, Firebase</p>
+              <a href="#" aria-label="TaskFlow project link">Live Demo</a>
+            </article>
+
+            <article class="project-card">
+              <h3>ShopSmart</h3>
+              <p>
+                An e-commerce storefront with optimized product search, cart,
+                and checkout experience.
+              </p>
+              <p class="stack">Stack: React, Node.js, MongoDB</p>
+              <a href="#" aria-label="ShopSmart project link">Source Code</a>
+            </article>
+
+            <article class="project-card">
+              <h3>InsightBoard</h3>
+              <p>
+                A dashboard that visualizes key business metrics with clear
+                charts and real-time updates.
+              </p>
+              <p class="stack">Stack: TypeScript, Express, Chart.js</p>
+              <a href="#" aria-label="InsightBoard project link">Case Study</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="container section-card contact">
+          <h2>Contact</h2>
+          <p>
+            Interested in working together? Reach out and let's build something
+            great.
+          </p>
+          <p>
+            Email:
+            <a href="mailto:alex.carter@example.com">alex.carter@example.com</a>
+          </p>
+          <div class="social-links" aria-label="Social links">
+            <a href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://x.com/your-handle" target="_blank" rel="noreferrer">X (Twitter)</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="current-year"></span> Alex Carter. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

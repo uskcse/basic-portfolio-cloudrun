@@ -1,0 +1,68 @@
+substitutions:
+  _SERVICE_NAME: basic-portfolio-site
+  _REGION: us-central1
+  _AR_REPO: cloud-run-images
+  _IMAGE: '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_SERVICE_NAME}:$SHORT_SHA'
+  _CPU: '1'
+  _MEMORY: 256Mi
+  _MIN_INSTANCES: '0'
+  _MAX_INSTANCES: '1'
+  _CONCURRENCY: '80'
+  _TIMEOUT_SECONDS: '60'
+
+steps:
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'Create Artifact Registry Repo (if missing)'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud artifacts repositories describe "${_AR_REPO}" --location="${_REGION}" >/dev/null 2>&1 || \
+        gcloud artifacts repositories create "${_AR_REPO}" \
+          --repository-format=docker \
+          --location="${_REGION}" \
+          --description="Docker images for Cloud Run services"
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build image'
+    args: ['build', '-t', '${_IMAGE}', '.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push image'
+    args: ['push', '${_IMAGE}']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'Deploy to Cloud Run'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - '${_SERVICE_NAME}'
+      - '--image'
+      - '${_IMAGE}'
+      - '--region'
+      - '${_REGION}'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '8080'
+      - '--cpu'
+      - '${_CPU}'
+      - '--memory'
+      - '${_MEMORY}'
+      - '--min-instances'
+      - '${_MIN_INSTANCES}'
+      - '--max-instances'
+      - '${_MAX_INSTANCES}'
+      - '--concurrency'
+      - '${_CONCURRENCY}'
+      - '--timeout'
+      - '${_TIMEOUT_SECONDS}'
+      - '--quiet'
+
+images:
+  - '${_IMAGE}'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

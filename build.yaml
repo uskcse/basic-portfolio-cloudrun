@@ -2,7 +2,7 @@ substitutions:
   _SERVICE_NAME: basic-portfolio-site
   _REGION: us-central1
   _AR_REPO: cloud-run-images
-  _IMAGE: '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_SERVICE_NAME}:$SHORT_SHA'
+  _TAG: latest
   _CPU: '1'
   _MEMORY: 256Mi
   _MIN_INSTANCES: '0'
@@ -25,11 +25,17 @@ steps:
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build image'
-    args: ['build', '-t', '${_IMAGE}', '.']
+    args:
+      - 'build'
+      - '-t'
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_SERVICE_NAME}:${_TAG}'
+      - '.'
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Push image'
-    args: ['push', '${_IMAGE}']
+    args:
+      - 'push'
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_SERVICE_NAME}:${_TAG}'
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: 'Deploy to Cloud Run'
@@ -39,7 +45,7 @@ steps:
       - 'deploy'
       - '${_SERVICE_NAME}'
       - '--image'
-      - '${_IMAGE}'
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_SERVICE_NAME}:${_TAG}'
       - '--region'
       - '${_REGION}'
       - '--platform'
@@ -62,7 +68,7 @@ steps:
       - '--quiet'
 
 images:
-  - '${_IMAGE}'
+  - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_SERVICE_NAME}:${_TAG}'
 
 options:
   logging: CLOUD_LOGGING_ONLY

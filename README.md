@@ -100,7 +100,7 @@ You can override defaults at runtime:
 ```bash
 gcloud builds submit \
   --config build.yaml \
-  --substitutions=_SERVICE_NAME=portfolio-site,_REGION=asia-south1,_AR_REPO=cloud-run-images,_CPU=1,_MEMORY=256Mi,_MIN_INSTANCES=0,_MAX_INSTANCES=1
+  --substitutions=_SERVICE_NAME=portfolio-site,_REGION=asia-south1,_AR_REPO=cloud-run-images,_TAG=latest,_CPU=1,_MEMORY=256Mi,_MIN_INSTANCES=0,_MAX_INSTANCES=1
 ```
 
 ## Notes
